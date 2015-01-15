@@ -1,0 +1,43 @@
+process.stdin.resume();
+process.stdin.setEncoding("ascii");var _input = [];
+
+var temp = null;
+var returnValue = "";
+var binaryValue = null
+var bitwized = null;
+
+function processData(input) {
+    for (var i = 1; i <= input[0] ; i++) {
+        binaryValue = pad(parseInt(input[i]).toString(2), 32);
+        bitwized = bitwize(binaryValue);
+        returnValue = returnValue + parseInt(bitwized, 2) + "\n";
+    }
+
+    return returnValue;
+}
+
+function pad(n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+
+function bitwize(value) {
+    stringValue = value.toString();
+    valueToReturn = "";
+    
+    for (var i = 0, len = stringValue.length ; i < len ; i++) {
+        temp = stringValue[i] == 0 ? 1 : 0;
+        valueToReturn = valueToReturn + temp;
+    }
+    
+    return valueToReturn;
+}
+
+process.stdin.on("data", function (input) {
+    _input = input;
+});
+
+process.stdin.on("end", function () {
+    process.stdout.write(processData(_input.split("\n")) + "\n");
+});
