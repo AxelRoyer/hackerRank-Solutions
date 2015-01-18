@@ -1,0 +1,36 @@
+'use strict';
+
+var processData = function (input) {
+    var returnValue = "";
+            
+    for (var i = 1; i <= input[0] ; i++) {
+        returnValue = returnValue + "" + getValueAfterCycles(input[i]) + "\n";
+    }
+    
+    return returnValue;
+}
+
+var getValueAfterCycles = function (nbCycles) {
+    var returnValue = 0;
+    var isOdd = true;
+    
+    for (var i = 0; i <= nbCycles ; i++) {
+        if (isOdd) {
+            returnValue = returnValue + 1;
+        } else {
+            returnValue = returnValue * 2;
+        }
+        
+        isOdd = !isOdd;
+    }
+    
+    return returnValue;
+}
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+var _input = "";
+process.stdin.on("data", function (input) { _input += input; });
+process.stdin.on("end", function () {
+    process.stdout.write(processData(_input.split("\n")));
+});
