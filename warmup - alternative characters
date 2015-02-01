@@ -1,0 +1,32 @@
+var result = "";
+
+function processData(input) {
+    for (var i = 1; i <= input[0] ; i++) {
+        result = result + getNbDeletionForAlternating(input[i]) + "\n";
+    }
+    
+    return result;
+}
+
+var getNbDeletionForAlternating = function(word) {
+    var nbDeletion = 0;
+    
+    for (var i = 0, len = word.length ; i < len ; i++) {
+        if (word[i] === word[i + 1]) {
+            nbDeletion++;
+        }
+    }
+    
+    return nbDeletion;
+};
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+   process.stdout.write(processData(_input.split("\n")));
+});
